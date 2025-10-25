@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض تطوير منصة المفقودات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; transform: translateY(20px); }
+        .section:nth-child(2) { animation-delay: 0.2s; transform: translateY(20px); }
+        .section:nth-child(3) { animation-delay: 0.3s; transform: translateY(20px); }
+        .section:nth-child(4) { animation-delay: 0.4s; transform: translateY(20px); }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-right: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .subsection:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .subsection h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .price-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5); }
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 30px;
+            border-right: 3px solid #667eea;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-left: -30px;
+        }
+
+        .timeline-content h4 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .list-items {
+            list-style: none;
+            padding-right: 20px;
+        }
+
+        .list-items li {
+            padding: 10px 0;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .list-items li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .feature-card h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .cost-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .cost-box:hover {
+            transform: scale(1.02);
+        }
+
+        .cost-box h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .subsection:hover,
+            .feature-card:hover,
+            .cost-box:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .content {
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.5em;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hosting-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hosting-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .hosting-card h4 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .hosting-card .price {
+            font-size: 1.8em;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .hosting-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .hosting-card ul li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+            color: #495057;
+        }
+
+        .hosting-card ul li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .hosting-card .link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .hosting-card .link:hover {
+            color: #764ba2;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: #d4edda;
+            border-right: 3px solid #28a745;
+        }
+
+        .cons {
+            background: #f8d7da;
+            border-right: 3px solid #dc3545;
+        }
+
+        .pros h5, .cons h5 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .pros h5 {
+            color: #155724;
+        }
+
+        .cons h5 {
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 مشروع منصة البحث عن المفقودات</h1>
+            <p>عرض تقني وخطة عمل متكاملة</p>
+        </div>
+
+        <div class="content">
+            <!-- نطاق المشروع -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">📋</span> نطاق المشروع</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>⚙️ Backend Development</h4>
+                        <p>Node.js + Express + MySQL</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎨 Frontend Development</h4>
+                        <p>React + Tailwind CSS</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🗄️ Database Design</h4>
+                        <p>تصميم وتنفيذ قاعدة البيانات</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🖌️ UI/UX Design</h4>
+                        <p>تصميم واجهات المستخدم</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التكلفة الأساسية -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">💰</span> هيكل التكاليف والخدمات</h2>
+                
+                <div class="price-highlight">
+                    التكلفة الأساسية للنظام: 25,000 جنيه مصري
+                </div>
+
+                <div class="subsection">
+                    <h3>يشمل السعر الأساسي:</h3>
+                    <ul class="list-items">
+                        <li>تطوير Backend كامل مع جميع APIs</li>
+                        <li>تطوير Frontend (نسخة الويب)</li>
+                        <li>تصميم وبناء قاعدة البيانات</li>
+                        <li>تصميم واجهات المستخدم (UI/UX)</li>
+                        <li>أنظمة الأمان المتقدمة</li>
+                        <li>الاختبار والنشر على السيرفر</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- الخدمات الإضافية -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">➕</span> الخدمات والتكاليف الإضافية</h2>
+
+                <div class="subsection">
+                    <h3>🔧 الخدمات الخارجية (غير محسوبة ضمن سعر المشروع)</h3>
+                    <p style="margin-bottom: 15px; color: #721c24; background: #f8d7da; padding: 15px; border-radius: 8px; font-weight: 600;">
+                        التكلفة تعتمد على اختيار العميل وتُحسب بشكل منفصل
+                    </p>
+                    <ul class="list-items">
+                        <li>استضافة السيرفر (VPS/Cloud Hosting)</li>
+                        <li>اسم النطاق (Domain)</li>
+                        <li>شهادة SSL</li>
+                        <li>خدمات Google Maps API</li>
+                        <li>خدمات الإشعارات (SMS/Email/Push Notifications)</li>
+                        <li>خدمات التخزين السحابي (للصور والملفات)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>📱 تطبيق الموبايل (اختياري)</h3>
+                    <div class="cost-box">
+                        <h4>التكلفة: 15,000 جنيه مصري</h4>
+                        <p><strong>يشمل:</strong></p>
+                        <ul class="list-items">
+                            <li>تطوير تطبيق Flutter لمنصتي Android و iOS</li>
+                            <li>التكامل الكامل مع Backend الموجود</li>
+                            <li>واجهات مستخدم متجاوبة</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-top: 20px; border-right: 4px solid #ffc107;">
+                        <h4 style="color: #856404; margin-bottom: 10px;">⚠️ خدمات خارجية إضافية مطلوبة (غير محسوبة):</h4>
+                        <ul class="list-items">
+                            <li>حساب Firebase (للإشعارات والتخزين)</li>
+                            <li>حساب Google Play Console (للأندرويد)</li>
+                            <li>حساب Apple Developer (للآيفون)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- حسابات المطورين -->
+                <div class="subsection">
+                    <h3>📲 حسابات المطورين على المتاجر الرقمية</h3>
+                    
+                    <div class="hosting-card">
+                        <h4>🤖 Google Play Developer Account</h4>
+                        <p style="color: #6c757d; margin-bottom: 15px;">حساب ضروري لنشر التطبيقات على متجر Google Play لأجهزة Android</p>
+                        
+                        <div class="price">$25 دولار أمريكي</div>
+                        <p style="color: #28a745; font-weight: 600; margin-bottom: 15px;">دفعة واحدة فقط (لا تتكرر)</p>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>العمولة على المبيعات:</strong>
+                            <p style="margin-top: 5px;">15% على أول مليون دولار من الإيرادات السنوية</p>
+                        </div>
+
+                        <h5 style="color: #667eea; margin: 15px 0;">المميزات:</h5>
+                        <ul>
+                            <li>حساب دائم بدون تجديد سنوي</li>
+                            <li>إمكانية نشر عدد غير محدود من التطبيقات</li>
+                            <li>لوحة تحكم شاملة لإدارة التطبيقات والإحصائيات</li>
+                        </ul>
+
+                        <h5 style="color: #764ba2; margin: 15px 0;">ملاحظات هامة:</h5>
+                        <ul>
+                            <li>يستغرق التفعيل حتى 24 ساعة</li>
+                            <li>يتطلب حساب Gmail صالح</li>
+                            <li>تحتاج معلومات شخصية أو بيانات الشركة للتسجيل</li>
+                        </ul>
+                    </div>
+
+                    <div class="hosting-card">
+                        <h4>🍎 Apple Developer Program</h4>
+                        <p style="color: #6c757d; margin-bottom: 15px;">برنامج إلزامي لنشر التطبيقات على App Store لأجهزة iOS</p>
+                        
+                        <div class="price">$99 دولار أمريكي</div>
+                        <p style="color: #dc3545; font-weight: 600; margin-bottom: 15px;">اشتراك سنوي (يجب التجديد سنوياً)</p>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>برنامج Enterprise:</strong>
+                            <p style="margin-top: 5px;">299 دولار سنوياً للتوزيع الداخلي فقط</p>
+                            <strong style="margin-top: 10px; display: block;">العمولة على المبيعات:</strong>
+                            <p style="margin-top: 5px;">30% أو 15% للمطورين الصغار المؤهلين</p>
+                        </div>
+
+                        <h5 style="color: #667eea; margin: 15px 0;">المميزات:</h5>
+                        <ul>
+                            <li>الوصول لأدوات التطوير الكاملة من Apple</li>
+                            <li>إمكانية نشر تطبيقات على App Store</li>
+                            <li>دعم فني من Apple</li>
+                        </ul>
+
+                        <h5 style="color: #764ba2; margin: 15px 0;">ملاحظات هامة:</h5>
+                        <ul>
+                            <li>يجب التجديد السنوي للحفاظ على التطبيقات في المتجر</li>
+                            <li>يتطلب Apple ID ومستندات إثبات الهوية</li>
+                            <li>عملية المراجعة أكثر صرامة من Google</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- الذكاء الاصطناعي -->
+                <div class="subsection">
+                    <h3>🤖 نظام الذكاء الاصطناعي (اختياري)</h3>
+                    <p style="margin-bottom: 20px; color: #495057;">التكلفة تعتمد على طريقة التنفيذ:</p>
+
+                    <div class="cost-box">
+                        <h4>الخيار الأول: تطوير AI من الصفر</h4>
+                        <p><strong>المدة:</strong> شهرين (8 أسابيع)</p>
+                        <div class="table-container" style="margin-top: 15px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>المستوى</th>
+                                        <th>عدد الأيام</th>
+                                        <th>متوسط الساعة</th>
+                                        <th>التكلفة الإجمالية</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="badge badge-info">Junior</span></td>
+                                        <td>14 يوم × 6 ساعات = 84 ساعة</td>
+                                        <td>150 ج.م</td>
+                                        <td><strong>12,600 ج.م</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge badge-primary">Mid-Level</span></td>
+                                        <td>12 يوم × 6 ساعات = 72 ساعة</td>
+                                        <td>250 ج.م</td>
+                                        <td><strong>18,000 ج.م</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge badge-warning">Senior</span></td>
+                                        <td>10 يوم × 6 ساعات = 60 ساعة</td>
+                                        <td>400 ج.م</td>
+                                        <td><strong>24,000 ج.م</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="cost-box">
+                        <h4>الخيار الثاني: استخدام AI جاهز</h4>
+                        <p style="margin-bottom: 15px;"><strong>التكلفة الشهرية:</strong> من $10 إلى $30 (حسب الخدمة)</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>الخدمة</th>
+                                        <th>الوظيفة</th>
+                                        <th>السعر الشهري</th>
+                                        <th>المميزات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Google Vision + Vertex AI</td>
+                                        <td>مطابقة الصور والنصوص</td>
+                                        <td>$15-25</td>
+                                        <td>دقة عالية + أمان قوي</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AWS Rekognition</td>
+                                        <td>صور + نصوص</td>
+                                        <td>$10-20</td>
+                                        <td>تكامل ممتاز + SDK جاهز</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OpenAI + Pinecone</td>
+                                        <td>صور + نصوص</td>
+                                        <td>$15-30</td>
+                                        <td>دقة مذهلة وسهل الدمج</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HuggingFace API</td>
+                                        <td>أي نموذج AI جاهز</td>
+                                        <td>$9-49</td>
+                                        <td>مرن جداً لاختبار موديلات</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; margin-top: 15px; border-right: 4px solid #17a2b8;">
+                            <h5 style="color: #0c5460; margin-bottom: 10px;">💡 التوصية للبدء:</h5>
+                            <p style="color: #0c5460;">استخدام <strong>OpenAI Embeddings + Pinecone</strong> للسهولة والدقة والتكلفة المنخفضة في المرحلة الأولى</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- حلول الاستضافة -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">🖥️</span> حلول الاستضافة (Hosting Solutions)</h2>
+                <p style="margin-bottom: 20px; color: #495057; font-size: 1.1em;">الخيارات المتاحة حسب مرحلة المشروع - للبداية السريعة (MVP):</p>
+
+                <div class="hosting-card">
+                    <h4>Hostinger VPS</h4>
+                    <div class="price">$3.99 - $9.99 / شهرياً</div>
+                    
+                    <p style="margin: 15px 0;"><strong>مناسب لـ:</strong> مشاريع صغيرة، مطورين محدودي الخبرة في DevOps</p>
+
+                                            <div class="pros-cons">
+                        <div class="pros">
+                            <h5>✅ المميزات</h5>
+                            <ul>
+                                <li>أرخص الخيارات</li>
+                                <li>واجهة سهلة الاستخدام</li>
+                                <li>دعم فني 24/7</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h5>⚠️ العيوب</h5>
+                            <ul>
+                                <li>غير مناسب لقواعد بيانات إنتاجية كبيرة</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="https://www.hostinger.com/vps-hosting" target="_blank" class="link">🔗 زيارة الموقع →</a>
+                </div>
+
+                <div class="hosting-card">
+                    <h4>Namecheap VPS</h4>
+                    <div class="price">$7 - $20 / شهرياً</div>
+                    
+                    <p style="margin: 15px 0;"><strong>مناسب لـ:</strong> مشاريع صغيرة اقتصادية</p>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h5>✅ المميزات</h5>
+                            <ul>
+                                <li>أسعار منافسة</li>
+                                <li>واجهة بسيطة</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h5>⚠️ العيوب</h5>
+                            <ul>
+                                <li>دعم enterprise محدود</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="https://www.namecheap.com/hosting/vps/" target="_blank" class="link">🔗 زيارة الموقع →</a>
+                </div>
+            </div>
+
+            <!-- الجدول الزمني -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">📅</span> الجدول الزمني للتنفيذ</h2>
+                <div class="price-highlight" style="font-size: 1.5em;">
+                    المدة الإجمالية: 6 شهور (24 أسبوع)
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر الأول: الإعداد والبنية الأساسية <span class="badge badge-primary">15%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 5,000 ج.م</p>
+                            <ul class="list-items">
+                                <li>تصميم قاعدة البيانات الكاملة</li>
+                                <li>إعداد بيئة التطوير والأدوات</li>
+                                <li>بناء نظام التسجيل والدخول</li>
+                                <li>تفعيل OTP (Email/SMS)</li>
+                                <li>إنشاء نظام الصلاحيات (User - Admin)</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> نظام مصادقة آمن وقاعدة بيانات جاهزة
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر الثاني: الوظائف الأساسية <span class="badge badge-primary">20%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 5,000 ج.م</p>
+                            <ul class="list-items">
+                                <li>تحديد الموقع الجغرافي (دولة - محافظة - منطقة)</li>
+                                <li>دمج خرائط Google Maps</li>
+                                <li>إضافة وإدارة الإعلانات (مفقود/معثور عليه)</li>
+                                <li>إدارة حسابات المستخدمين</li>
+                                <li>نظام البحث والفلترة المتقدم</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> المستخدم يستطيع إنشاء حساب وإضافة إعلانات والبحث فيها
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر الثالث: التواصل والإشعارات <span class="badge badge-primary">20%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 5,000 ج.م</p>
+                            <ul class="list-items">
+                                <li>بناء نظام المحادثات الداخلي الآمن</li>
+                                <li>تشفير End-to-End للمحادثات</li>
+                                <li>حماية الهوية داخل الشات</li>
+                                <li>نظام الإشعارات المتعدد (Push/Email/SMS)</li>
+                                <li>نظام التنبيهات عند وجود تطابقات</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> نظام تواصل آمن وإشعارات فورية
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر الرابع: المزايا المتقدمة <span class="badge badge-primary">20%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 5,000 ج.م</p>
+                            <ul class="list-items">
+                                <li>نظام إثبات الملكية (أسئلة وصور إضافية)</li>
+                                <li>خريطة تفاعلية للمفقودات</li>
+                                <li>دعم اللغة العربية والإنجليزية</li>
+                                <li>نظام توثيق الحسابات (✓)</li>
+                                <li>قسم الطوارئ (إعلانات عاجلة)</li>
+                                <li>نظام النقاط والسمعة</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> منصة متكاملة بمزايا احترافية
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر الخامس: الأمان ولوحات التحكم <span class="badge badge-warning">10%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 2,500 ج.م</p>
+                            <ul class="list-items">
+                                <li>تشفير البيانات الحساسة (AES/RSA)</li>
+                                <li>تفعيل HTTPS + SSL</li>
+                                <li>Web Application Firewall (WAF)</li>
+                                <li>نظام مراقبة النشاط وسجلات الأمان</li>
+                                <li>لوحة تحكم المدير (إدارة المستخدمين والإعلانات)</li>
+                                <li>المصادقة الثنائية (2FA)</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> نظام محمي بالكامل مع أدوات إدارة احترافية
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>الشهر السادس: الاختبار والإطلاق <span class="badge badge-success">10%</span></h4>
+                            <p><strong>المدة:</strong> 30 يوم | <strong>الدفعة:</strong> 2,500 ج.م</p>
+                            <ul class="list-items">
+                                <li>اختبار الأداء والحمل</li>
+                                <li>اختبار الأمان والثغرات</li>
+                                <li>مراجعة وتحسين واجهة المستخدم</li>
+                                <li>إصلاح الأخطاء</li>
+                                <li>رفع النظام على السيرفر النهائي</li>
+                                <li>ربط النطاق وتفعيل SSL</li>
+                                <li>إطلاق النسخة التجريبية (Beta)</li>
+                                <li>إعداد التوثيق الفني الكامل</li>
+                            </ul>
+                            <div style="background: #d4edda; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>الناتج:</strong> نسخة مستقرة جاهزة للإطلاق التجاري
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ملخص المراحل والدفعات -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">📊</span> ملخص المراحل والدفعات</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>المرحلة</th>
+                                <th>المدة</th>
+                                <th>النسبة</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>الشهر 1</strong> - الإعداد والبنية</td>
+                                <td>30 يوم</td>
+                                <td>20%</td>
+                                <td><strong>5,000 ج.م</strong></td>
+                                <td><span class="badge badge-success">🟢 البداية</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>الشهر 2</strong> - الوظائف الأساسية</td>
+                                <td>30 يوم</td>
+                                <td>20%</td>
+                                <td><strong>5,000 ج.م</strong></td>
+                                <td><span class="badge badge-primary">🔵 التنفيذ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>الشهر 3</strong> - التواصل والإشعارات</td>
+                                <td>30 يوم</td>
+                                <td>20%</td>
+                                <td><strong>5,000 ج.م</strong></td>
+                                <td><span class="badge badge-primary">🔵 التنفيذ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>الشهر 4</strong> - المزايا المتقدمة</td>
+                                <td>30 يوم</td>
+                                <td>20%</td>
+                                <td><strong>5,000 ج.م</strong></td>
+                                <td><span class="badge badge-primary">🔵 التنفيذ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>الشهر 5</strong> - الأمان والتحكم</td>
+                                <td>30 يوم</td>
+                                <td>10%</td>
+                                <td><strong>2,500 ج.م</strong></td>
+                                <td><span class="badge badge-warning">🟠 النهائي</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>الشهر 6</strong> - الاختبار والإطلاق</td>
+                                <td>30 يوم</td>
+                                <td>10%</td>
+                                <td><strong>2,500 ج.م</strong></td>
+                                <td><span class="badge badge-info">🟣 التسليم</span></td>
+                            </tr>
+                            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.2em;">
+                                <td><strong>الإجمالي</strong></td>
+                                <td><strong>6 شهور</strong></td>
+                                <td><strong>100%</strong></td>
+                                <td><strong>25,000 ج.م</strong></td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- خطة AI -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">🤖</span> خطة تطوير الذكاء الاصطناعي (إذا تم اختياره)</h2>
+                <div class="price-highlight" style="font-size: 1.3em;">
+                    المدة: شهرين (8 أسابيع)
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>الأسبوع 1-2</h4>
+                        <strong>التحليل والتجهيز</strong>
+                        <p style="margin-top: 10px; font-size: 0.9em;">تحليل المتطلبات، تصميم المعمارية، إعداد البيئة</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الأسبوع 3-4</h4>
+                        <strong>مطابقة الصور</strong>
+                        <p style="margin-top: 10px; font-size: 0.9em;">نموذج CNN، استخراج Features، اختبار المطابقة</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الأسبوع 5-6</h4>
+                        <strong>تحليل النصوص</strong>
+                        <p style="margin-top: 10px; font-size: 0.9em;">نموذج NLP، دمج النتائج، تحسين الدقة</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الأسبوع 7</h4>
+                        <strong>التكامل</strong>
+                        <p style="margin-top: 10px; font-size: 0.9em;">ربط AI بالنظام، اختبار شامل، تحسين الأداء</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الأسبوع 8</h4>
+                        <strong>الأمان والتوثيق</strong>
+                        <p style="margin-top: 10px; font-size: 0.9em;">تشفير البيانات، اختبار الثغرات، التوثيق</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المخرجات النهائية -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">🎯</span> المخرجات النهائية</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>💻 التطبيق الكامل</h4>
+                        <ul style="text-align: right; font-size: 0.9em;">
+                            <li>منصة ويب متكاملة</li>
+                            <li>نظام إدارة محتوى</li>
+                            <li>لوحات تحكم للمدير</li>
+                            <li>قاعدة بيانات مؤمنة</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 الأمان</h4>
+                        <ul style="text-align: right; font-size: 0.9em;">
+                            <li>تشفير شامل للبيانات</li>
+                            <li>حماية من الهجمات</li>
+                            <li>نظام صلاحيات متقدم</li>
+                            <li>سجلات أمان كاملة</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📚 الوثائق</h4>
+                        <ul style="text-align: right; font-size: 0.9em;">
+                            <li>دليل المستخدم الشامل</li>
+                            <li>التوثيق الفني للمطورين</li>
+                            <li>دليل الإدارة والصيانة</li>
+                            <li>API Documentation</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎓 التدريب</h4>
+                        <ul style="text-align: right; font-size: 0.9em;">
+                            <li>جلسات تدريبية للفريق</li>
+                            <li>شرح إدارة المنصة</li>
+                            <li>دعم فني خلال التطوير</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 الأكواد المصدرية</h4>
+                        <ul style="text-align: right; font-size: 0.9em;">
+                            <li>أكواد Backend & Frontend</li>
+                            <li>قاعدة البيانات الكاملة</li>
+                            <li>ملفات الإعدادات</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- خطوات ما بعد الموافقة -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">📞</span> خطوات ما بعد الموافقة</h2>
+                <div class="subsection">
+                    <ul class="list-items">
+                        <li>توقيع العقد وتحديد تفاصيل المشروع النهائية</li>
+                        <li>دفع الدفعة الأولى (20% = 5,000 ج.م)</li>
+                        <li>بدء العمل فوراً على المرحلة الأولى</li>
+                        <li>اجتماعات متابعة أسبوعية لعرض التقدم</li>
+                        <li>مراجعات دورية في نهاية كل شهر</li>
+                        <li>تسليم تدريجي حسب الجدول الزمني</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- الخلاصة -->
+            <div class="section">
+                <h2 class="section-title"><span class="icon">✅</span> الخلاصة</h2>
+                <div class="subsection">
+                    <div class="feature-grid">
+                        <div class="cost-box">
+                            <h4>💰 التكلفة الأساسية</h4>
+                            <p style="font-size: 1.5em; color: #667eea; font-weight: bold;">25,000 ج.م</p>
+                            <p>نظام الويب الكامل</p>
+                        </div>
+                        <div class="cost-box">
+                            <h4>📱 تطبيق الموبايل</h4>
+                            <p style="font-size: 1.5em; color: #764ba2; font-weight: bold;">+15,000 ج.م</p>
+                            <p>اختياري</p>
+                        </div>
+                        <div class="cost-box">
+                            <h4>🤖 الذكاء الاصطناعي</h4>
+                            <p style="font-size: 1.3em; color: #28a745; font-weight: bold;">12,600 - 24,000 ج.م</p>
+                            <p>أو اشتراك شهري (اختياري)</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: center; border: 2px solid #ffc107;">
+                        <h3 style="color: #856404; margin-bottom: 10px;">⚡ الخدمات الخارجية</h3>
+                        <p style="color: #856404;">حسب الاختيار (سيرفر، دومين، APIs، حسابات المطورين)</p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+                        <h3 style="font-size: 1.8em; margin-bottom: 10px;">⏱️ المدة: 6 شهور للنظام الأساسي</h3>
+                        <p style="font-size: 1.2em;">✅ دعم فني كامل خلال فترة التطوير</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <a href="#" class="btn" onclick="window.print(); return false;">📄 طباعة العرض أو حفظ كـ PDF</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3 style="margin-bottom: 15px; font-size: 1.8em;">🚀 نحن جاهزون لبدء مشروعكم وتحويل رؤيتكم إلى واقع!</h3>
+            <p style="font-size: 1.1em;">لأي استفسارات أو تفاصيل إضافية، نحن في خدمتكم</p>
+            <p style="margin-top: 20px; opacity: 0.8;">© 2025 - جميع الحقوق محفوظة</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
